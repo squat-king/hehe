@@ -41,7 +41,7 @@
 
 		</div>
 <div>
-<font color="red"> ${error}</font>
+<font color="red"> ${msg}</font>
 </div>
 		<div class="loginbody">
 
@@ -51,7 +51,7 @@
 
 				<ul>
 					<li>
-						<input name="username" type="text" class="loginuser" value=""
+						<input name="userId" type="text" class="loginuser" value=""
 							onclick="JavaScript:this.value=''" />
 					</li>
 					<li>

@@ -1,22 +1,19 @@
 package common.util;
 
-import com.attendance.model.User;
+import com.attendance.bean.UserBean;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
 public class DBUtil {
-    public static Map<String, User> userMap = new HashMap<String, User>();
+    public static Map<String, UserBean> userMap = new HashMap<String, UserBean>();
     static {
-        addUser(new User("siki","123",10,"男",true));
-        addUser(new User("123","123",10,"男",true));
+        addUser(new UserBean("00000001","admin","123",true));
 
     }
-    private static void addUser(User user) {
-        userMap.put(user.getUsername(), user);
+    private static void addUser(UserBean user) {
+        userMap.put(user.getE_NO(),user);
     }
 
 }

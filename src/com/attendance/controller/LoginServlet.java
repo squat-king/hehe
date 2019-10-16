@@ -1,20 +1,23 @@
 package com.attendance.controller;
 
-import com.attendance.model.User;
-import com.attendance.service.LoginService;
+import com.attendance.bean.UserBean;
 import com.attendance.service.UserService;
-import com.attendance.service.impl.LoignServiceImpl;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/login_do")
 public class LoginServlet extends HttpServlet {
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doPost(req,resp);
+	}
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -29,14 +32,14 @@ public class LoginServlet extends HttpServlet {
 
 	public void doLogin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String username = request.getParameter("username");
+		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		UserService serive = new UserService();
-		User user = serive.login(username, password);
+		UserBean user = serive.login(userId, password);
 		if(user!=null) {
 			request.getSession().setAttribute("user", user);
 
-			if(user.isAdmin()) {
+			if(user.getE_ISADMIN()) {
 //				resp.sendRedirect( "/admin/goods_list.jsp");
 //				request.getRequestDispatcher("/admin/goods_list").forward(req, resp);
 				response.sendRedirect(request.getContextPath() +"/index.jsp");

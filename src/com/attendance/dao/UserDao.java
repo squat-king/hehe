@@ -1,23 +1,32 @@
 package com.attendance.dao;
 
-import com.attendance.model.User;
+
+import com.attendance.bean.UserBean;
 import common.util.DBUtil;
 
 public class UserDao {
-    public boolean isExist(String username) {
-        return DBUtil.userMap.containsKey(username);
+    public boolean isExist(String userId) {
+        return DBUtil.userMap.containsKey(userId);
     }
-    public boolean addUser(String username,String password,int age ,String sex) {
-        if(isExist(username))return false;
-        User u = new User(username,password,age,sex,false);
-        DBUtil.userMap.put(u.getUsername(), u);
+
+    public boolean addUser(String userId, String username, String password) {
+        if (isExist(username)) {
+            return false;
+        }
+        UserBean u = new UserBean(userId, username, password, false);
+        DBUtil.userMap.put(u.getE_NO(), u);
         return true;
     }
-    public User getUserByUP(String username,String password) {
-        if(isExist(username)==false)return null;
-        User u = DBUtil.userMap.get(username);
-        if(u.getPassword().equals(password))return u;
-        else return null;
+
+    public UserBean getUserByUP(String userId, String password) {
+        if (isExist(userId) == false) {
+            return null;
+        }
+        UserBean u = DBUtil.userMap.get(userId);
+        if (u.getE_PASSWD().equals(password)) {
+            return u;
+        } else {
+            return null;
+        }
     }
 }
-

@@ -2,10 +2,7 @@ package common.util;
 
 import java.sql.*;
 
-/**
- * ������
- *
- */
+
 public class ConnectionPool {
 
 	public static Connection getConn() {
@@ -42,7 +39,6 @@ public class ConnectionPool {
 		try {
 			if (stmt != null) {
 				stmt.close();
-				stmt = null;
 			}
 			if (rs != null) {
 				rs.close();
