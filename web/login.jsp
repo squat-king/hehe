@@ -6,7 +6,6 @@
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
 		<script language="JavaScript" src="js/jquery.js"></script>
 		<script src="js/cloud.js" type="text/javascript"></script>
-
 		<script language="javascript">
 	$(function(){
     $('.loginbox').css({'position':'absolute','left':($(window).width()-692)/2});
@@ -18,7 +17,7 @@
 		<script>
 //登录
  function loginButton(){
-  document.forms[0].action="${pageContext.request.contextPath }/login_do";
+  document.forms[0].action="${pageContext.request.contextPath}/LoginServlet";
   document.forms[0].submit();
  }
 </script>
@@ -62,11 +61,11 @@
 						<input name="" type="button" class="loginbtn" value="登录"
 							onclick="loginButton()" />
 						<label>
-							<input name="" type="checkbox" value="" checked="checked" />
+							<input name="rememberPwd" type="checkbox" value="yes" checked="checked" />
 							记住密码
 						</label>
 						<label>
-							<input name="" type="checkbox" value="" />
+							<input name="autoLogin" type="checkbox" value="yes" />
 							自动登录
 						</label>
 					</li>

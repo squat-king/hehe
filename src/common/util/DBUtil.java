@@ -29,11 +29,12 @@ public class DBUtil {
 
     public UserBean findUserById(UserBean userBean) {
 
-        String sql = "select * from EMPLOYEE where E_NO = ?";
+        String sql = "select * from EMPLOYEE where E_NO = ? and E_PASSWD = ?";
         conn = ConnectionPool.getConn();
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, userBean.getE_NO());
+            ps.setString(2,userBean.getE_PASSWD());
             rs = ps.executeQuery();
             if (rs.next()) {
                 String userId = rs.getString("E_NO");
