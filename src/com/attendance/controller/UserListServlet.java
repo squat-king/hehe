@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -15,12 +16,14 @@ import java.util.List;
 public class UserListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserService service=new UserService();
-            List<UserBean> list = service.userList();
-            request.setAttribute("list",list);
+        UserService service = new UserService();
+        List<UserBean> list = service.userList();
+        HttpSession session=request.getSession();
+        session.setAttribute("list", list);
         System.out.println(request.getContextPath());
-            response.sendRedirect(request.getContextPath()+"/userSearch.jsp");
+//        request.getRequestDispatcher(request.getContextPath()+"/user/userSearch.jsp");
 
+        response.sendRedirect(request.getContextPath()+"/user/userSearch.jsp");
     }
 
     @Override

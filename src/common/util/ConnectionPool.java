@@ -11,7 +11,7 @@ public class ConnectionPool {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection(
-					"jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
+					"jdbc:oracle:thin:@localhost:1521:orcl", "scott", "root");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

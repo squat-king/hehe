@@ -50,7 +50,7 @@ public class UserAddServlet extends HttpServlet {
 
         UserService userService=new UserService();
         if(userService.userAdd(userBean)){
-            resp.sendRedirect(req.getContextPath()+"/userSearch.jsp");
+            resp.sendRedirect(req.getContextPath()+"/user/userSearch.jsp");
         }
     }
 }

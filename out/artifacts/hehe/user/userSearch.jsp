@@ -111,22 +111,22 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                                         <tbody>
 
                                         <c:forEach items="${list}" var="user">
-                                        <tr>
-                                            <td><input name="" type="checkbox" value=""/></td>
-                                            <td>${user.E_NO}</td>
-                                            <td>${user.E_NAME}</td>
-                                            <td>${user.E_DEPT}</td>
-                                            <td>${user.E_JOB}</td>
-                                            <td>${user.E_REGISTTIME}</td>
-                                            <td>${user.E_SEX}</td>
-                                            <td>${user.E_PHONE}</td>
-                                            <td>${user.E_BIRTHDAY}</td>
-                                            <td>${user.E_EMAIL}</td>
-                                            <td><span><a href="userUpdate.jsp" class="tablelink"><img
-                                                    src="../images/t02.png"/>修改</a> <a href="#" class="tablelink"
-                                                                                       onclick="confirm('确定要删除吗？')"> <img
-                                                    src="../images/t03.png"/>删除</a></span></td>
-                                        </tr>
+                                            <tr>
+                                                <td><input name="" type="checkbox" value=""/></td>
+                                                <td>${user.E_NO}</td>
+                                                <td>${user.E_NAME}</td>
+                                                <td>${user.E_DEPT}</td>
+                                                <td>${user.E_JOB}</td>
+                                                <td>${user.E_REGISTTIME}</td>
+                                                <td>${user.E_SEX}</td>
+                                                <td>${user.E_PHONE}</td>
+                                                <td>${user.E_BIRTHDAY}</td>
+                                                <td>${user.E_EMAIL}</td>
+                                                <td><span><a href="userUpdate.jsp" class="tablelink"><img
+                                                        src="../images/t02.png"/>修改</a> <a href="#" class="tablelink"
+                                                                                           onclick="confirm('确定要删除吗？')"> <img
+                                                        src="../images/t03.png"/>删除</a></span></td>
+                                            </tr>
                                         </c:forEach>
                                         </tbody>
                                     </table>
