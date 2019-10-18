@@ -2,7 +2,7 @@ package com.attendance.controller;
 
 import com.attendance.bean.UserBean;
 import com.attendance.service.UserService;
-import org.apache.commons.beanutils.BeanUtils;
+
 import sun.nio.ch.SelectorImpl;
 
 import javax.servlet.ServletException;

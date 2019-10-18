@@ -24,18 +24,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String rememberPwd = request.getParameter("rememberPwd");
-        String autoLogin=request.getParameter("autoLogin");
-        if(rememberPwd.equals("yes")){
-            String userId = request.getParameter("userId");
-            String password = request.getParameter("password");
-            Cookie idCookie=new Cookie("userId",userId);
-            idCookie.setMaxAge(60 * 60 * 24 * 3);
-            Cookie pwdCookie=new Cookie("password",password);
-            pwdCookie.setMaxAge(60 * 60 * 24 * 3);
-            response.addCookie(idCookie);
-            response.addCookie(pwdCookie);
-        }
+
 
         doLogin(request,response);
 
@@ -46,7 +35,6 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String userId = request.getParameter("userId");
         String password = request.getParameter("password");
-
         UserBean userBean = new UserBean();
         userBean.setE_NO(userId);
         userBean.setE_PASSWD(password);
@@ -55,6 +43,19 @@ public class LoginServlet extends HttpServlet {
         UserBean user = service.getUserById(userBean);
 
         if (user != null) {
+            String rememberPwd = request.getParameter("rememberPwd");
+            String autoLogin=request.getParameter("autoLogin");
+
+            if(rememberPwd.equals("yes")){
+                Cookie idCookie=new Cookie("userId",userId);
+                idCookie.setMaxAge(60 * 60 * 24 * 3);
+                Cookie pwdCookie=new Cookie("password",password);
+                pwdCookie.setMaxAge(60 * 60 * 24 * 3);
+                Cookie autCookie=new Cookie("autoLogin",autoLogin);
+                response.addCookie(idCookie);
+                response.addCookie(pwdCookie);
+                response.addCookie(autCookie);
+            }
 
             request.getSession().setAttribute("level", user.e_ISADMIN);
             response.sendRedirect(request.getContextPath() + "/index.jsp");

@@ -10,6 +10,11 @@ public class UserBean {
     public UserBean() {
     }
 
+    public UserBean(String e_NO,String e_PASSWD) {
+        this.e_NO = e_NO;
+        this.e_PASSWD = e_PASSWD;
+    }
+
     public String e_REGISTTIME;
     public String e_SEX;
     public String e_PHONE;

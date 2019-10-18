@@ -38,10 +38,10 @@ $(function(){
 
 
 	<body style="background: #f0f9fd;">
-<%--		<%--%>
-<%--			//超级管理员权限--%>
-<%--			if ("0".equals(session.getAttribute("level"))) {--%>
-<%--		%>--%>
+<%
+
+//if ("0".equals(session.getAttribute("level"))) {
+  %>
 		<div class="lefttop">
 			<span></span>用户管理
 		</div>
@@ -80,13 +80,13 @@ $(function(){
 			</dd>
 		</dl>
 <%--		<%--%>
-<%--			}--%>
+<%--<% }; %>--%>
 <%--		%>--%>
 
 <%--		<%--%>
 <%--			//部门主管权限--%>
-<%--			if ("1".equals(session.getAttribute("level"))) {--%>
-<%--		%>--%>
+<%if ("1".equals(session.getAttribute("level"))) {%>
+
 		<div class="lefttop">
 			<span></span>用户管理
 		</div>
@@ -141,13 +141,13 @@ $(function(){
 			</dd>
 		</dl>
 
-<%--		<%--%>
-<%--			}--%>
+
+<%		}%>
 <%--		%>--%>
 
-<%--		<%--%>
+
 <%--			//普通员工权限--%>
-<%--			if ("2".equals(session.getAttribute("level"))) {--%>
+<%			if ("2".equals(session.getAttribute("level"))) {%>
 <%--		%>--%>
 
 
@@ -194,9 +194,9 @@ $(function(){
 			</dd>
 		</dl>
 
-<%--		<%--%>
-<%--			}--%>
-<%--		%>--%>
+		<%
+			}
+		%>
 
 	</body>
 </html>

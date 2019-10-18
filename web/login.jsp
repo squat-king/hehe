@@ -1,4 +1,5 @@
-﻿<%@ page language="java" pageEncoding="UTF-8"%>
+﻿<%@ page import="com.attendance.bean.UserBean" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -26,7 +27,28 @@
 
 	<body
 		style="background-color: #1c77ac; background-image: url(images/light.png); background-repeat: no-repeat; background-position: center top; overflow: hidden;">
+<%
+	String userId = "";
+	String password ="";
+	String autoLogin ="";
+	Cookie[] cookies = request.getCookies();
+	for (int i = 0; i < cookies.length; i++) {//对cookies中的数据进行遍历，找到用户名、密码的数据
+		    if ("userId".equals(cookies[i].getName())) {
+				userId = cookies[i].getValue();
+			        } else if ("password".equals(cookies[i].getName())) {
+			    password = cookies[i].getValue();
+			        }else if ("autoLogin".equals(cookies[i].getName())) {
+				autoLogin = cookies[i].getValue();
+			}
+            if("yes".equals(autoLogin)){
+            	request.setAttribute("userId",userId);
+				request.setAttribute("password",password);
+				request.getRequestDispatcher("/LoginServlet").forward(request, response);
+			}
+		   }
 
+
+%>
 <form name="loginForm" method="post">
 
 		<div id="mainBody">
@@ -50,11 +72,11 @@
 
 				<ul>
 					<li>
-						<input name="userId" type="text" class="loginuser" value=""
+						<input name="userId" type="text" class="loginuser" value="<%=userId%>"
 							onclick="JavaScript:this.value=''" />
 					</li>
 					<li>
-						<input name="password" type="password" class="loginpwd" value=""
+						<input name="password" type="password" class="loginpwd" value="<%=password%>"
 							onclick="JavaScript:this.value=''" />
 					</li>
 					<li>
@@ -65,7 +87,7 @@
 							记住密码
 						</label>
 						<label>
-							<input name="autoLogin" type="checkbox" value="yes" />
+							<input name="autoLogin" type="checkbox" value="yes" checked="checked"/>
 							自动登录
 						</label>
 					</li>
