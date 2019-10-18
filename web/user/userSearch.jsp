@@ -113,15 +113,15 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                                         <c:forEach items="${list}" var="user">
                                             <tr>
                                                 <td><input name="" type="checkbox" value=""/></td>
-                                                <td>${user.E_NO}</td>
-                                                <td>${user.E_NAME}</td>
-                                                <td>${user.E_DEPT}</td>
-                                                <td>${user.E_JOB}</td>
-                                                <td>${user.E_REGISTTIME}</td>
-                                                <td>${user.E_SEX}</td>
-                                                <td>${user.E_PHONE}</td>
-                                                <td>${user.E_BIRTHDAY}</td>
-                                                <td>${user.E_EMAIL}</td>
+                                                <td>${user.e_NO}</td>
+                                                <td>${user.e_NAME}</td>
+                                                <td>${user.e_DEPT}</td>
+                                                <td>${user.e_JOB}</td>
+                                                <td>${user.e_REGISTTIME}</td>
+                                                <td>${user.e_SEX}</td>
+                                                <td>${user.e_PHONE}</td>
+                                                <td>${user.e_BIRTHDAY}</td>
+                                                <td>${user.e_EMAIL}</td>
                                                 <td><span><a href="userUpdate.jsp" class="tablelink"><img
                                                         src="../images/t02.png"/>修改</a> <a href="#" class="tablelink"
                                                                                            onclick="confirm('确定要删除吗？')"> <img

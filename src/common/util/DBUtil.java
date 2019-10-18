@@ -111,12 +111,14 @@ public class DBUtil {
         try {
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-            int itemNum = this.getItemCount("EMPLOYEE");
-            for (int i = 0; i < itemNum; i++) {
-                userBean = new UserBean(rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(4),
+//            int itemNum = this.getItemCount("EMPLOYEE");
+//            for (int i = 0; i < itemNum; i++) {
+            while(rs.next()) {
+                userBean = new UserBean(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
                         rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
                         rs.getString(9), rs.getString(10), rs.getString(11));
                 list.add(userBean);
+//            }
             }
             ConnectionPool.close(ps, rs, conn);
         } catch (SQLException e) {

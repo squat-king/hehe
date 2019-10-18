@@ -26,7 +26,7 @@ public class UserAddServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        req.setCharacterEncoding("utf-8");
         String password1=req.getParameter("password");
         String passwordConfirm =req.getParameter("passwordConfirm");
 
@@ -50,7 +50,7 @@ public class UserAddServlet extends HttpServlet {
 
         UserService userService=new UserService();
         if(userService.userAdd(userBean)){
-            resp.sendRedirect(req.getContextPath()+"/user/userSearch.jsp");
+            resp.sendRedirect(req.getContextPath()+"/UserListServlet");
         }
     }
 }
