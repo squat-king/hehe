@@ -3,23 +3,32 @@ package com.attendance.service;
 import com.attendance.bean.UserBean;
 import com.attendance.dao.UserDao;
 
+import java.util.List;
+
 public class UserService {
-    public boolean register(String userId, String username, String password) {
-        UserDao userDao = new UserDao();
-        boolean isExist = userDao.isExist(userId);
-        if (isExist) {
-            return false;
-        } else {
-            userDao.addUser(userId, username, password);
-            return true;
-        }
+    UserDao userDao=new UserDao();
+//    public boolean regist(UserBean userBean) {
+//        boolean isExist = userDao.isExist(userBean);
+//        if (isExist) {
+//            return false;
+//        } else {
+//            userDao.addUser(userBean);
+//            return true;
+//        }
+//    }
+
+    public UserBean getUserById(UserBean userBean) {
+        return userDao.get(userBean);
     }
 
-    public UserBean login(String username, String password) {
-        return new UserDao().getUserByUP(username, password);
+    public Boolean userAdd(UserBean userBean){
+        return userDao.add(userBean);
+    };
+
+    public List<UserBean> userList(){
+        return userDao.list();
     }
 
-    public boolean isExist(String userId) {
-        return new UserDao().isExist(userId);
-    }
+
+
 }
