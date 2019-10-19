@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.attendance.bean.UserBean;
 import com.attendance.dao.UserDao;
+import com.attendance.service.UserService;
 import common.util.CookieUitl;
 @WebFilter("/login.jsp")
 public class PrivFilter implements Filter {
@@ -33,23 +34,30 @@ public class PrivFilter implements Filter {
             chain.doFilter(request, response);
             return;
         }else {
-            String username = (String) request.getSession().getAttribute("username");
-            if(username==null) {
+            String name = CookieUitl.getCookieValByKey("userId", request);
+            if(name!=null) {
                 String val = CookieUitl.getCookieValByKey("autoLogin", request);
-                if(val!= null&& !val.equals("")) {
-                    String name = CookieUitl.getCookieValByKey("userId", request);
+                if(val!=null) {
                     String pass = CookieUitl.getCookieValByKey("password", request);
 
                     if(new UserDao().ifExist(new UserBean(name,pass))) {
                         request.getSession().setAttribute("username", name);
-//                        response.sendRedirect("main.jsp");
-                        chain.doFilter(request, response);
+                        UserBean userBean = new UserBean();
+                        userBean.setE_NO(name);
+                        userBean.setE_PASSWD(pass);
+
+                        UserService service = new UserService();
+                        UserBean user = service.getUserById(userBean);
+                        request.getSession().setAttribute("level", user.e_ISADMIN);
+                        response.sendRedirect(request.getContextPath() + "/index.jsp");
+//                       response.sendRedirect("main.jsp");
+//                        chain.doFilter(request, response);
                         return;
                     }else {
-                        response.sendRedirect("login.jsp");
+                        chain.doFilter(request, response);
                     }
                 }else {
-                    response.sendRedirect("login.jsp");
+                    chain.doFilter(request, response);
                 }
             }else {
                 chain.doFilter(request, response);
