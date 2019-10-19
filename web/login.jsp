@@ -30,21 +30,14 @@
 <%
 	String userId = "";
 	String password ="";
-	String autoLogin ="";
 	Cookie[] cookies = request.getCookies();
 	for (int i = 0; i < cookies.length; i++) {//对cookies中的数据进行遍历，找到用户名、密码的数据
 		    if ("userId".equals(cookies[i].getName())) {
 				userId = cookies[i].getValue();
 			        } else if ("password".equals(cookies[i].getName())) {
 			    password = cookies[i].getValue();
-			        }else if ("autoLogin".equals(cookies[i].getName())) {
-				autoLogin = cookies[i].getValue();
-			}
-            if("yes".equals(autoLogin)){
-            	request.setAttribute("userId",userId);
-				request.setAttribute("password",password);
-				request.getRequestDispatcher("/LoginServlet").forward(request, response);
-			}
+			        }
+
 		   }
 
 
@@ -83,11 +76,11 @@
 						<input name="" type="button" class="loginbtn" value="登录"
 							onclick="loginButton()" />
 						<label>
-							<input name="rememberPwd" type="checkbox" value="yes" checked="checked" />
+							<input name="rememberPwd" type="checkbox" value="yes" checked="checked"defaultChecked="no"	 />
 							记住密码
 						</label>
 						<label>
-							<input name="autoLogin" type="checkbox" value="yes" checked="checked"/>
+							<input type="checkbox" name="autoLogin" value="auto" >
 							自动登录
 						</label>
 					</li>
