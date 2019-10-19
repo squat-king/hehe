@@ -127,4 +127,22 @@ public class DBUtil {
         }
         return list;
     }
+
+    public Boolean remove(String userId){
+        String sql = "delete  from EMPLOYEE where E_NO = ?";
+        Boolean flag = false;
+        conn = ConnectionPool.getConn();
+        try {
+            ps.setString(1,userId);
+            ps = conn.prepareStatement(sql);
+            if (ps.executeUpdate() > 0) {
+                flag = true;
+            }
+            ;
+            ConnectionPool.close(ps, conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
 }

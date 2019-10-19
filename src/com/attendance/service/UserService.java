@@ -6,7 +6,7 @@ import com.attendance.dao.UserDao;
 import java.util.List;
 
 public class UserService {
-    UserDao userDao=new UserDao();
+    UserDao userDao = new UserDao();
 //    public boolean regist(UserBean userBean) {
 //        boolean isExist = userDao.isExist(userBean);
 //        if (isExist) {
@@ -21,14 +21,18 @@ public class UserService {
         return userDao.get(userBean);
     }
 
-    public Boolean userAdd(UserBean userBean){
+    public Boolean userAdd(UserBean userBean) {
         return userDao.add(userBean);
-    };
+    }
 
-    public List<UserBean> userList(){
+    ;
+
+    public List<UserBean> userList() {
         return userDao.list();
     }
 
-
+    public Boolean userRemove(String userId) {
+        return userDao.remove(userId);
+    }
 
 }
