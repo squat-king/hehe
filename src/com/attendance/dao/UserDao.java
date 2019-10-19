@@ -35,4 +35,8 @@ public class UserDao {
     public List<UserBean> list(){
         return dbUtil.listUser();
     }
+
+    public boolean remove(String userId){
+        return dbUtil.remove(userId);
+    }
 }
