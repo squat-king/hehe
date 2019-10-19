@@ -2,6 +2,7 @@ package com.attendance.controller;
 
 import com.attendance.bean.UserBean;
 import com.attendance.service.UserService;
+import common.util.CookieUitl;
 
 
 import javax.servlet.ServletException;
@@ -29,12 +30,29 @@ public class LoginServlet extends HttpServlet {
         doLogin(request,response);
 
     }
+    public void remove(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
+//清除session
+        request.getSession().setAttribute("user", null);
+//清除登录cookie
+        String autoLogin   = CookieUitl.getCookieValByKey("autoLogin", request);
+        Cookie autoLoginCookie =new Cookie("autoLogin",autoLogin);
+          if (null != autoLoginCookie) {
+            autoLoginCookie.setPath(request.getContextPath() + "/");
+            autoLoginCookie.setMaxAge(0);
+            response.addCookie(autoLoginCookie);
+        }
+//重定向到首页
+        response.sendRedirect(request.getContextPath());
+    }
 
     public void doLogin(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String userId = request.getParameter("userId");
         String password = request.getParameter("password");
+        String rememberPwd = request.getParameter("rememberPwd");
+        String autoLogin=request.getParameter("autoLogin");
         UserBean userBean = new UserBean();
         userBean.setE_NO(userId);
         userBean.setE_PASSWD(password);
@@ -43,10 +61,7 @@ public class LoginServlet extends HttpServlet {
         UserBean user = service.findUserById(userId);
 
         if (user != null) {
-            String rememberPwd = request.getParameter("rememberPwd");
-            String autoLogin=request.getParameter("autoLogin");
-
-            if(rememberPwd.equals("yes")){
+           if(rememberPwd.equals("yes")){
                 Cookie idCookie=new Cookie("userId",userId);
                 idCookie.setMaxAge(60 * 60 * 24 * 3);
                 Cookie pwdCookie=new Cookie("password",password);

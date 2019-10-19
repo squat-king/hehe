@@ -12,7 +12,15 @@ public class UserDao {
     public UserBean isExist(UserBean userBean) {
         return dbUtil.findUserById(userBean);
     }
+    public boolean ifExist(UserBean userBean) {
+        if (dbUtil.findUserById(userBean)==null){
+            return false;
+        }else{
+            return true;
+        }
 
+
+    }
     public boolean add(UserBean userBean) {
         if (!(isExist(userBean) == null)) {
             return false;

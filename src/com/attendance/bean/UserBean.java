@@ -130,4 +130,5 @@ public class UserBean {
         this.e_EMAIL = e_EMAIL;
         this.e_ISADMIN = e_ISADMIN;
     }
+
 }
