@@ -38,7 +38,10 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
             if(res==true){
                 window.location.href="${pageContext.request.contextPath}/UserDeleteServlet?id="+e_NO;
             }
+        }
 
+        function update(e_NO) {
+            window.location.href="${pageContext.request.contextPath}/getMessageServlet?id="+e_NO;
         }
     </script>
 </head>
@@ -130,7 +133,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                                                 <td>${user.e_PHONE}</td>
                                                 <td>${user.e_BIRTHDAY}</td>
                                                 <td>${user.e_EMAIL}</td>
-                                                <td><span><a href="userUpdate.jsp" class="tablelink"><img
+                                                <td><span><a href="#" class="tablelink" onclick="update('${user.e_NO}')"><img
                                                         src="../images/t02.png"/>修改</a> <a href="#" class="tablelink"
                                                                                            onclick="ask('${user.e_NO}')"> <img
                                                         src="../images/t03.png"/>删除</a></span></td>

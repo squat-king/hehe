@@ -17,8 +17,8 @@ public class UserService {
 //        }
 //    }
 
-    public UserBean getUserById(UserBean userBean) {
-        return userDao.get(userBean);
+    public UserBean findUserById(String userId) {
+        return userDao.get(userId);
     }
 
     public Boolean userAdd(UserBean userBean) {

@@ -20,8 +20,8 @@ public class UserDao {
         return dbUtil.add(userBean);
     }
 
-    public UserBean get(UserBean userBean) {
-        return dbUtil.findUserById(userBean);
+    public UserBean get(String userId) {
+        return dbUtil.findUserById(userId);
     }
 
     public List<UserBean> list(){

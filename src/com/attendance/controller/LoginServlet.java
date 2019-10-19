@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
         userBean.setE_PASSWD(password);
 
         UserService service = new UserService();
-        UserBean user = service.getUserById(userBean);
+        UserBean user = service.findUserById(userId);
 
         if (user != null) {
             String rememberPwd = request.getParameter("rememberPwd");
