@@ -13,8 +13,9 @@ import java.io.IOException;
 public class UserDeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.setCharacterEncoding("utf-8");
         String id = request.getParameter("id");
+        System.out.println(id);
         UserService userService = new UserService();
         if (userService.userRemove(id)) {
             response.sendRedirect(request.getContextPath() + "/UserListServlet");

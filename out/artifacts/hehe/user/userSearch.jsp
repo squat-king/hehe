@@ -32,6 +32,14 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                 width: 100
             });
         });
+
+        function ask(e_NO) {
+            var res=confirm("确定要删除吗????");
+            if(res==true){
+                window.location.href="${pageContext.request.contextPath}/UserDeleteServlet?id="+e_NO;
+            }
+
+        }
     </script>
 </head>
 
@@ -124,7 +132,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                                                 <td>${user.e_EMAIL}</td>
                                                 <td><span><a href="userUpdate.jsp" class="tablelink"><img
                                                         src="../images/t02.png"/>修改</a> <a href="#" class="tablelink"
-                                                                                           onclick="confirm('确定要删除吗？')"> <img
+                                                                                           onclick="ask('${user.e_NO}')"> <img
                                                         src="../images/t03.png"/>删除</a></span></td>
                                             </tr>
                                         </c:forEach>

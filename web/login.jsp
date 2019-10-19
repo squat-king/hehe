@@ -21,6 +21,7 @@
   document.forms[0].action="${pageContext.request.contextPath}/LoginServlet";
   document.forms[0].submit();
  }
+
 </script>
 
 	</head>

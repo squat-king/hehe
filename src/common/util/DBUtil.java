@@ -133,8 +133,8 @@ public class DBUtil {
         Boolean flag = false;
         conn = ConnectionPool.getConn();
         try {
-            ps.setString(1,userId);
             ps = conn.prepareStatement(sql);
+            ps.setString(1,userId);
             if (ps.executeUpdate() > 0) {
                 flag = true;
             }
