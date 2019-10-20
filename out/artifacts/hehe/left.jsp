@@ -38,10 +38,10 @@ $(function(){
 
 
 	<body style="background: #f0f9fd;">
-<%
+<%--<%--%>
 
-//if ("0".equals(session.getAttribute("level"))) {
-  %>
+<%--if ("0".equals(session.getAttribute("level"))) {--%>
+  <%--%>--%>
 		<div class="lefttop">
 			<span></span>用户管理
 		</div>
@@ -57,7 +57,7 @@ $(function(){
 						<cite></cite><a href="index.html" target="rightFrame">首页</a><i></i>
 					</li>
 					<li class="active">
-						<cite></cite><a href="user/userSearch.jsp" target="rightFrame">用户管理</a><i></i>
+						<cite></cite><a href="/UserListServlet" target="rightFrame">用户管理</a><i></i>
 					</li>
 				</ul>
 			</dd>
@@ -80,12 +80,12 @@ $(function(){
 			</dd>
 		</dl>
 <%--		<%--%>
-<%--<% }; %>--%>
-<%--		%>--%>
+       <%--<%}; %>--%>
+ <%--		%>--%>
 
 <%--		<%--%>
 <%--			//部门主管权限--%>
-<%if ("1".equals(session.getAttribute("level"))) {%>
+<%--if ("1".equals(session.getAttribute("level"))) {--%>
 
 		<div class="lefttop">
 			<span></span>用户管理
@@ -142,12 +142,15 @@ $(function(){
 		</dl>
 
 
-<%		}%>
+<%--		}%>
 <%--		%>--%>
 
 
 <%--			//普通员工权限--%>
-<%			if ("2".equals(session.getAttribute("level"))) {%>
+<%--			if ("2".equals(session.getAttribute("level"))) {
+
+
+%>
 <%--		%>--%>
 
 
@@ -194,9 +197,9 @@ $(function(){
 			</dd>
 		</dl>
 
-		<%
-			}
-		%>
+		<%--<%--%>
+			<%--}--%>
+		<%--%>--%>
 
 	</body>
 </html>

@@ -2,6 +2,7 @@ package common.util;
 
 import com.attendance.bean.UserBean;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,12 +13,13 @@ import java.util.concurrent.Phaser;
 
 
 public class DBUtil {
-    Connection conn;
-    PreparedStatement ps;
-    ResultSet rs;
-
+    static Connection conn;
+    static PreparedStatement ps;
+    static ResultSet rs;
+    private static ThreadLocal<Connection> tl = new ThreadLocal<Connection>();
     public static Map<String, UserBean> userMap = new HashMap<String, UserBean>();
-
+    public static DataSource dataSource;
+    public static PreparedStatement pstm;
 //    static {
 //        add(new UserBean("00000001", "admin", "123", "1"));
 //
@@ -27,7 +29,7 @@ public class DBUtil {
 //        userMap.put(user.getE_NO(), user);
 //    }
 
-    public UserBean findUserById(UserBean userBean) {
+    public static UserBean findUserById(UserBean userBean) {
 
         String sql = "select * from EMPLOYEE where E_NO = ? and E_PASSWD = ?";
         conn = ConnectionPool.getConn();
@@ -60,7 +62,7 @@ public class DBUtil {
         return null;
     }
 
-    public int getItemCount(String table) {
+    public static int getItemCount(String table) {
         int num = 0;
         String sql = "select count(*) from " + table;
         conn = ConnectionPool.getConn();
@@ -77,7 +79,7 @@ public class DBUtil {
         return num;
     }
 
-    public Boolean add(UserBean user) {
+    public static Boolean add(UserBean user) {
         String sql = "insert into EMPLOYEE values(?,?,?,?,?,?,?,?,?,?,0)";
         Boolean flag = false;
         conn = ConnectionPool.getConn();
@@ -104,7 +106,7 @@ public class DBUtil {
         return flag;
     }
 
-    public List<UserBean> listUser() {
+    public static List<UserBean> listUser() {
         List<UserBean> list = new ArrayList<UserBean>();
         String sql = "select * from EMPLOYEE";
         UserBean userBean;
@@ -128,7 +130,7 @@ public class DBUtil {
         return list;
     }
 
-    public Boolean remove(String userId){
+    public static Boolean remove(String userId){
         String sql = "delete  from EMPLOYEE where E_NO = ?";
         Boolean flag = false;
         conn = ConnectionPool.getConn();
@@ -145,4 +147,53 @@ public class DBUtil {
         }
         return flag;
     }
+
+    public static Connection getConnection() {
+
+        Connection conn = tl.get();// 从当前线程上获得链接
+        try {
+            if (conn == null || conn.isClosed() ) {
+                //从连接池中获取连接对象
+                conn = dataSource.getConnection();
+                // 把连接绑定到当前线程上
+                tl.set(conn);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return conn;
+    }
+
+
+    public static int myExecuteUpdate(String sql, List list) throws Exception {
+        //连接数据库并告诉小帮手去干嘛
+        pstm = getConnection().prepareStatement(sql);
+        if (list != null) {
+            //用for循环遍历list集合中，sql语句中?相匹配的值
+            for (int i = 0; i < list.size(); i++) {
+                pstm.setObject(i + 1, list.get(i));
+            }
+        }
+        return pstm.executeUpdate();
+    }
+    // 所有的查询的方法
+    public static ResultSet myExecuteQuery(String sql, List list) {
+
+        try {
+            pstm = ConnectionPool.getConn().prepareStatement(sql);
+            if (list != null) {
+                for (int i = 0; i < list.size(); i++) {
+                    pstm.setObject(i + 1, list.get(i));
+                }
+            }
+            return pstm.executeQuery();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

@@ -1,10 +1,16 @@
 package common.util;
 
+import com.attendance.bean.UserBean;
+
+import javax.sql.DataSource;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ConnectionPool {
-
+	private static ThreadLocal<Connection> tl = new ThreadLocal<Connection>();
+	public static DataSource dataSource;
 	public static Connection getConn() {
 		Connection conn = null;
 
@@ -49,5 +55,19 @@ public class ConnectionPool {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	public static Connection getConnection() {
+
+		Connection conn = tl.get();
+		try {
+			if (conn == null || conn.isClosed() ) {
+				conn = dataSource.getConnection();
+				tl.set(conn);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return conn;
 	}
 }

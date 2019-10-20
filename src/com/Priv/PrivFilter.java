@@ -49,7 +49,8 @@ public class PrivFilter implements Filter {
                         UserService service = new UserService();
                         UserBean user = service.getUserById(userBean);
                         request.getSession().setAttribute("level", user.e_ISADMIN);
-                        response.sendRedirect(request.getContextPath() + "/index.jsp");
+                        request.getSession().setAttribute("user", user);
+                        response.sendRedirect(request.getContextPath() + "/main.jsp");
 //                       response.sendRedirect("main.jsp");
 //                        chain.doFilter(request, response);
                         return;

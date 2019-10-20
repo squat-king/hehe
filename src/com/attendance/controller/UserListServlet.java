@@ -1,6 +1,8 @@
 package com.attendance.controller;
 
+import com.attendance.bean.PageBean;
 import com.attendance.bean.UserBean;
+import com.attendance.dao.ProductDao;
 import com.attendance.service.UserService;
 
 import javax.servlet.ServletException;
@@ -14,15 +16,26 @@ import java.util.List;
 
 @WebServlet("/UserListServlet")
 public class UserListServlet extends HttpServlet {
+
+    ProductDao productDao=new ProductDao();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserService service = new UserService();
-        List<UserBean> list = service.userList();
-        HttpSession session=request.getSession();
-        session.setAttribute("list", list);
-        System.out.println(request.getContextPath());
-//        request.getRequestDispatcher(request.getContextPath()+"/user/userSearch.jsp");
 
+        int p=1;
+        request.setCharacterEncoding("utf-8");
+
+        if (request.getParameter("page")!=null) {
+            System.out.println(request.getParameter("page")+"1111");
+            p = Integer.parseInt(request.getParameter("page"));
+        }
+
+        PageBean pb=new PageBean();
+        pb.setAllRows(ProductDao.getAllRows("EMPLOYEE"));
+        pb.setCurrentPage(p);
+
+        productDao.splitPage(pb);
+        HttpSession session=request.getSession();
+        session.setAttribute("pb",pb);
         response.sendRedirect(request.getContextPath()+"/user/userSearch.jsp");
     }
 

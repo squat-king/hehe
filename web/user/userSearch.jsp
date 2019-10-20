@@ -43,7 +43,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
     </script>
 </head>
 
-<body>
+<body onload="">
 
 <div class="place">
     <span>位置：</span>
@@ -118,7 +118,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                                         </thead>
                                         <tbody>
 
-                                        <c:forEach items="${list}" var="user">
+                                        <c:forEach items="${pb.list}" var="user">
                                             <tr>
                                                 <td><input name="" type="checkbox" value=""/></td>
                                                 <td>${user.e_NO}</td>
@@ -153,17 +153,12 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
 
 
 <div class="pagin">
-    <div class="message">共<i class="blue">1256</i>条记录，当前显示第&nbsp;<i class="blue">2&nbsp;</i>页</div>
+    <div class="message">共<i class="blue">${pb.allRows}</i>条记录，共<i class="blue">${pb.totalPage}</i>页当前显示第&nbsp;<i class="blue">${pb.currentPage}&nbsp;</i>页</div>
     <ul class="paginList">
-        <li class="paginItem"><a href="javascript:;"><span class="pagepre"></span></a></li>
-        <li class="paginItem"><a href="javascript:;">1</a></li>
-        <li class="paginItem current"><a href="javascript:;">2</a></li>
-        <li class="paginItem"><a href="javascript:;">3</a></li>
-        <li class="paginItem"><a href="javascript:;">4</a></li>
-        <li class="paginItem"><a href="javascript:;">5</a></li>
-        <li class="paginItem more"><a href="javascript:;">...</a></li>
-        <li class="paginItem"><a href="javascript:;">10</a></li>
-        <li class="paginItem"><a href="javascript:;"><span class="pagenxt"></span></a></li>
+        <li class="paginItem"><a href="/UserListServlet?page=1">首页</a></li>
+        <li class="paginItem"><a href="/UserListServlet?page=${pb.currentPage-1}"><span class="pagepre"></span></a></li>
+        <li class="paginItem"><a href="/UserListServlet?page=${pb.currentPage+1}"><span class="pagenxt"></span></a></li>
+        <li class="paginItem"><a href="/UserListServlet?page=${pb.currentPage=totalPage}">尾页</a></li>
     </ul>
 </div>
 

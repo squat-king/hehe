@@ -60,17 +60,17 @@
       <ul class="forminfo">
         <li>
           <label>工号 </label>
-          </label><input name="" type="text" class="scinput" value="20130901" readonly="readonly" /></li>
+          </label><input name="" type="text" class="scinput" value="${user.e_NO}" readonly="readonly" /></li>
         <li>
-          <label>密码 <font color="red">*</font></label>
-          <input name="" type="password" class="dfinput" value="123" />
+          <label>密码 <font color="red">${user.e_NO}</font></label>
+          <input name="" type="password" class="dfinput" value="${user.e_NO}" />
         </li>
         <li>
           <label>确认密码 <font color="red">*</font></label><input name="" type="password" class="dfinput" />
         </li>
         <li>
           <label>姓名 <font color="red">*</font></label>
-          </label><input name="" type="text" class="dfinput" value="admin" />
+          </label><input name="" type="text" class="dfinput" value="${user.e_NO}" />
         </li>
         <li><label>部门</label>
           <div class="vocation">
@@ -90,8 +90,8 @@
             <input name="" type="radio" value="" />
             女</cite></li>
         <li><label>手机号码 <font color="red">*</font></label><input name="" type="text" class="dfinput"
-            value="13356789067" /></li>
-        <li><label>出生日期</label><input name="" type="text" class="dfinput" value="1980-09-09"
+            value="${user.e_NO}" /></li>
+        <li><label>出生日期</label><input name="" type="text" class="dfinput" value="${user.e_NO}"
             onClick="WdatePicker({work_date:'',dateFmt:'yyyy-MM-dd'})" /></li>
         <li><label>邮箱 <font color="red">*</font></label><input name="" type="text" class="dfinput"
             value="admin_163.com" /></li>
